@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.board.FO4Board.mapper.MemberMapper">
+  	<insert id="insertUser">
+		insert into member (
+			name, email, 
+			password, is_admin, registration_date
+			) 
+			value(
+			#{name}, #{email},
+			#{password}, 0, now())
+	</insert>
+	<select id="selectUser" resultType="com.board.FO4Board.vo.MemberVO">
+		select * 
+			from member
+			where 
+				email = #{email} 
+	</select>
+
+	<select id="selectPasswd" resultType="string">
+		SELECT password
+		  FROM member
+		 WHERE email = #{email}
+	</select>
+	<!-- 관리자 확인 -->
+	<select id="isAdmin" resultType="String">
+		SELECT is_admin
+		FROM member
+		WHERE email = #{email}
+	</select>
+	<!-- 비밀번호 찾기 변경 -->
+	<update id="updatePass">
+		UPDATE member
+		   SET member_passwd = #{securePasswd} 
+		 WHERE member_email = #{member_email}
+	</update>
+	<!-- 0615추가	 회원가입 이메일 중복 체크 -->
+	<select id="selectEmailCheck" resultType="String">
+		SELECT email
+		FROM member
+		WHERE email = #{email}
+	</select>
+	
+  </mapper>

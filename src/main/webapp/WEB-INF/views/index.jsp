@@ -14,8 +14,9 @@
 <link rel="stylesheet" type="text/css" href="resources/js/select.dataTables.min.css">
 <link rel="stylesheet" href="resources/css/vertical-layout-light/style.css">
 <script type="text/javascript" src="resources/js/jquery-3.6.4.js"></script>
-<script type="text/javascript">
 
+<!-- todolist 비동기식 추가 -->
+<script type="text/javascript">
 $(function() {
 	$('#addTodo').click(function(){
 		$.ajax({
@@ -62,6 +63,15 @@ function getTodoList(){
 		});
 	}
 </script>
+
+<script type="text/javascript">
+	function deletTodo(todo_idx) {
+	  $(document).on('click', function (e) {
+		  
+	    });
+	}
+</script>
+
 </head>
 <body>
 <body>
@@ -508,7 +518,7 @@ function getTodoList(){
 										${todoList.title }
 									<i class="input-helper"></i></label>
 								</div>
-								<i class="remove ti-close"></i>
+								<span onclick="deletTodo(${todoList.todo_idx})" class="remove ti-close" ></span>
 							</li>
 						</c:forEach>						
 					</ul>

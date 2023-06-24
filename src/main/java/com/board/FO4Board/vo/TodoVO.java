@@ -3,15 +3,16 @@ package com.board.FO4Board.vo;
 import java.util.Date;
 
 public class TodoVO {
-	private int idx;
+	private int todo_idx;
 	private String title;
 	private Date created;
 	private String completed;
-	public int getIdx() {
-		return idx;
+	
+	public int getTodo_idx() {
+		return todo_idx;
 	}
-	public void setIdx(int idx) {
-		this.idx = idx;
+	public void setTodo_idx(int todo_idx) {
+		this.todo_idx = todo_idx;
 	}
 	public String getTitle() {
 		return title;

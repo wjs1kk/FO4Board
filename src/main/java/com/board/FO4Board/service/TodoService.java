@@ -18,4 +18,7 @@ public class TodoService {
 	public int insertTodo(int member_idx, String title) {
 		return mapper.insertTodo(member_idx, title);
 	}
+	public int deleteTodo(int todo_idx) {
+		return mapper.deleteTodo(todo_idx);
+	}
 }

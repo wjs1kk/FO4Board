@@ -9,4 +9,5 @@ import com.board.FO4Board.vo.TodoVO;
 public interface TodoMapper {
 	public List<TodoVO> selectTodo(int member_idx);
 	public int insertTodo(@Param("member_idx") int member_idx, @Param("title") String title);
+	public int deleteTodo(int todo_idx);
 }

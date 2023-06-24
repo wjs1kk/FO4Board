@@ -15,4 +15,9 @@
 			into todo (member_idx, title)
 			values (#{member_idx}, #{title})
 	</insert>
+	<delete id="deleteTodo">
+		delete 
+			from todo 
+			where todo_idx = #{todo_idx}
+	</delete>
 </mapper>

@@ -18,6 +18,7 @@ import com.board.FO4Board.service.TodoService;
 public class TodoController {
 	@Autowired
 	private TodoService todoService;
+	
 	@ResponseBody
 	@PostMapping("insertTodo")
 	public Map insertTodo(HttpSession session,@RequestParam("title")  String title) {
@@ -27,5 +28,9 @@ public class TodoController {
 		map.put("result", "ok");
 		System.out.println(map.get("result"));
 		return map;
+	}
+	@PostMapping("deleteTodo")
+	public void deleteTodo(@RequestParam("todo_idx") int todo_idx) {
+		
 	}
 }

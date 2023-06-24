@@ -13,6 +13,32 @@
 <link rel="stylesheet" href="resources/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
 <link rel="stylesheet" type="text/css" href="resources/js/select.dataTables.min.css">
 <link rel="stylesheet" href="resources/css/vertical-layout-light/style.css">
+<script type="text/javascript" src="resources/js/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+
+$(function() {
+	$('#addTodo').click(function(){
+		$.ajax({
+			type : "post",
+			url : "insertTodo",
+			data : {
+				title: $("#title").val()
+			},
+			success : function(data) {
+				
+				if (data.result == "ok") {
+					// 리스트 업데이트하는 getList()를 실행시킨다.
+// 					getTodoList();
+					alert("ok");
+				}
+			},
+			error : function(){
+	               alert("통신실패");
+	           }
+		});
+	});	
+});
+</script>
 </head>
 <body>
 <body>
@@ -42,13 +68,13 @@
         
 <!--         로그인 유무에따른 화면 -->
         <c:choose>
-	       	<c:when test="${empty sessionScope.idx }">
+	       	<c:when test="${empty sessionScope.member_idx }">
 	       		<div class="navbar-nav navbar-nav-right">
 		          <a href="login" class="nav-item text-dark">로그인</a>
 		          <a href="join" class="nav-item text-dark">회원가입</a>
 		        </div>
 	       	</c:when>
-	       	<c:when test="${sessionScope.idx == 0 }">
+	       	<c:when test="${sessionScope.member_idx == 0 }">
 	       		<div class="navbar-nav navbar-nav-right">
 		          <a href="#" class="nav-item text-dark">관리자페이지</a>
 		          <a href="logout" class="nav-item text-dark">로그아웃</a>
@@ -444,70 +470,33 @@
                 </div>
               </div>
             </div>
-            
           </div>
-          <div class="row">
-          	<div class="col-md-12 grid-margin stretch-card">
-				<div class="card">
-					<div class="card-body">
-						<h4 class="card-title">To Do Lists</h4>
-						<div class="list-wrapper pt-2">
-							<ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-								<li>
-									<div class="form-check form-check-flat">
-										<label class="form-check-label">
-											<input class="checkbox" type="checkbox">
-											Meeting with Urban Team
-										</label>
-									</div>
-									<i class="remove ti-close"></i>
-								</li>
-								<li class="completed">
-									<div class="form-check form-check-flat">
-										<label class="form-check-label">
-											<input class="checkbox" type="checkbox" checked>
-											Duplicate a project for new customer
-										</label>
-									</div>
-									<i class="remove ti-close"></i>
-								</li>
-								<li>
-									<div class="form-check form-check-flat">
-										<label class="form-check-label">
-											<input class="checkbox" type="checkbox">
-											Project meeting with CEO
-										</label>
-									</div>
-									<i class="remove ti-close"></i>
-								</li>
-								<li class="completed">
-									<div class="form-check form-check-flat">
-										<label class="form-check-label">
-											<input class="checkbox" type="checkbox" checked>
-											Follow up of team zilla
-										</label>
-									</div>
-									<i class="remove ti-close"></i>
-								</li>
-								<li>
-									<div class="form-check form-check-flat">
-										<label class="form-check-label">
-											<input class="checkbox" type="checkbox">
-											Level up for Antony
-										</label>
-									</div>
-									<i class="remove ti-close"></i>
-								</li>
-							</ul>
-                  </div>
-                  <div class="add-items d-flex mb-0 mt-2">
-										<input type="text" class="form-control todo-list-input"  placeholder="Add new task">
-										<button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
-									</div>
+<!--           todolist -->
+         <div class="card">
+			<div class="card-body">
+				<h4 class="card-title">To Do Lists</h4>
+				<div class="list-wrapper pt-2">
+					<ul class="d-flex flex-column-reverse">
+						<c:forEach items="${todoList }" var="todoList">
+							<li>
+								<div class="form-check">
+									<label class="form-check-label">
+										<input class="checkbox" type="checkbox">
+										${todoList.title }
+									<i class="input-helper"></i></label>
 								</div>
-							</div>
-            </div>
-          </div>
+								<i class="remove ti-close"></i>
+							</li>
+						</c:forEach>						
+					</ul>
+                  </div>
+                 <div class="add-items d-flex mb-0 mt-2">
+				<input id="title" type="text"  placeholder="Add new task">
+				<button id="addTodo" class="btn-icon"><i class="icon-circle-plus"></i></button>
+			  </div>
+			</div>
+		</div>
+ 
                   <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">

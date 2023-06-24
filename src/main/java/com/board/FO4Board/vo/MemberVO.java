@@ -3,17 +3,18 @@ package com.board.FO4Board.vo;
 import java.util.Date;
 
 public class MemberVO {
-	private int idx;
+	private int member_idx;
 	private String name;
 	private String email;
 	private String password;
 	private String is_admin;
 	private Date registration_date;
-	public int getIdx() {
-		return idx;
+	
+	public int getMember_idx() {
+		return member_idx;
 	}
-	public void setIdx(int idx) {
-		this.idx = idx;
+	public void setMember_idx(int member_idx) {
+		this.member_idx = member_idx;
 	}
 	public String getName() {
 		return name;

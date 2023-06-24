@@ -1,5 +1,6 @@
 package com.board.FO4Board.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -14,15 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.board.FO4Board.service.MemberService;
+import com.board.FO4Board.service.TodoService;
 import com.board.FO4Board.vo.MemberVO;
+import com.board.FO4Board.vo.TodoVO;
 
 @Controller
 public class HomeController {
 	@Autowired
 	private MemberService memberService;
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {	
+	@Autowired
+	private TodoService todoService;
+	@GetMapping("/")
+	public String home(Model model, HttpSession session) {
+		if(session.getAttribute("member_idx") == null) {
+			return "index";
+		}
+		int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
+		List<TodoVO> todoList = todoService.selectTodo(member_idx);	
+		model.addAttribute("todoList",todoList);
 		return "index";
 	}
 	@GetMapping("login")
@@ -34,20 +44,17 @@ public class HomeController {
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String passwd = memberService.selectPasswd(email);
-		System.out.println(passwd);
-		System.out.println(password);
 		if (passwd == null || !passwordEncoder.matches(password, passwd)) {
 			model.addAttribute("msg", "로그인 실패!");
 			return "fail_back";
 		}
 		String isAdmin =  memberService.isAdmin(email);
-		System.out.println(isAdmin);
 		if(isAdmin.equals("1")) {
-			session.setAttribute("idx", 0);
+			session.setAttribute("member_idx", 0);
 		}
 		else {
 			MemberVO member = memberService.selectUser(email);
-			session.setAttribute("idx", member.getIdx());
+			session.setAttribute("member_idx", member.getMember_idx());
 		}
 		return "redirect:/";
 	}

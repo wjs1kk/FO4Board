@@ -25,11 +25,9 @@ $(function() {
 				title: $("#title").val()
 			},
 			success : function(data) {
-				
 				if (data.result == "ok") {
-					// 리스트 업데이트하는 getList()를 실행시킨다.
-// 					getTodoList();
-					alert("ok");
+					// 리스트 업데이트하는 getTodoList()를 실행시킨다.
+					getTodoList();
 				}
 			},
 			error : function(){
@@ -38,6 +36,31 @@ $(function() {
 		});
 	});	
 });
+
+function getTodoList(){
+	var formData = new FormData();
+	$.ajax({
+		type : "get",
+		url : "./",
+			dataType : "text",
+			data : formData, 
+			contentType: false, 
+			processData: false, 
+			cache : false,
+			success : function(data) {
+//            		 받아온 데이터로 새로 뿌려주기
+				var html = jQuery('<div>').html(data);
+				var todo = html.find("div#todoList").html();
+// 				입력창 비우기
+				$('#title').val('');
+				$("#todoList").html(todo);
+				
+			},
+			error : function(){
+                alert("통신실패");
+            }
+		});
+	}
 </script>
 </head>
 <body>
@@ -475,11 +498,11 @@ $(function() {
          <div class="card">
 			<div class="card-body">
 				<h4 class="card-title">To Do Lists</h4>
-				<div class="list-wrapper pt-2">
-					<ul class="d-flex flex-column-reverse">
+				<div id="todoList" class="list-wrapper pt-2">
+					<ul class="d-flex flex-column-reverse todo-list todo-list-custom">
 						<c:forEach items="${todoList }" var="todoList">
 							<li>
-								<div class="form-check">
+								<div class="form-check form-check-flat">
 									<label class="form-check-label">
 										<input class="checkbox" type="checkbox">
 										${todoList.title }
@@ -492,7 +515,7 @@ $(function() {
                   </div>
                  <div class="add-items d-flex mb-0 mt-2">
 				<input id="title" type="text"  placeholder="Add new task">
-				<button id="addTodo" class="btn-icon"><i class="icon-circle-plus"></i></button>
+				<button id="addTodo" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
 			  </div>
 			</div>
 		</div>

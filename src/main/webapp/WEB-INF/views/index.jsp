@@ -66,9 +66,19 @@ function getTodoList(){
 
 <script type="text/javascript">
 	function deletTodo(todo_idx) {
-	  $(document).on('click', function (e) {
-		  
-	    });
+	  var ans = confirm("삭제하시겠습니까?")
+	  if(ans){
+		  var query = {"todo_idx" : todo_idx};
+		  $.ajax({
+			 url: "deleteTodo",
+			 type : "post",
+			 data : query,
+			 success : function(data){
+				 location.reload();
+			 }
+		  });
+	  }
+
 	}
 </script>
 
@@ -518,7 +528,7 @@ function getTodoList(){
 										${todoList.title }
 									<i class="input-helper"></i></label>
 								</div>
-								<span onclick="deletTodo(${todoList.todo_idx})" class="remove ti-close" ></span>
+								<span id="test11" onclick="deletTodo(${todoList.todo_idx})" class="remove ti-close" ></span>
 							</li>
 						</c:forEach>						
 					</ul>

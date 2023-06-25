@@ -26,11 +26,11 @@ public class TodoController {
 		todoService.insertTodo(member_idx, title);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", "ok");
-		System.out.println(map.get("result"));
 		return map;
 	}
+	@ResponseBody
 	@PostMapping("deleteTodo")
 	public void deleteTodo(@RequestParam("todo_idx") int todo_idx) {
-		
+		todoService.deleteTodo(todo_idx);
 	}
 }

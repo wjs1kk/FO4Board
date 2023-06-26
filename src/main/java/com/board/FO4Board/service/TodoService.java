@@ -21,4 +21,10 @@ public class TodoService {
 	public int deleteTodo(int todo_idx) {
 		return mapper.deleteTodo(todo_idx);
 	}
+	public int checkTodo(int todo_idx) {
+		return mapper.checkTodo(todo_idx);
+	}
+	public int uncheckedTodo(int todo_idx) {
+		return mapper.uncheckedTodo(todo_idx);
+	}
 }

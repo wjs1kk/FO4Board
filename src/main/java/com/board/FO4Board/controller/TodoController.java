@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,5 +33,15 @@ public class TodoController {
 	@PostMapping("deleteTodo")
 	public void deleteTodo(@RequestParam("todo_idx") int todo_idx) {
 		todoService.deleteTodo(todo_idx);
+	}
+	@ResponseBody
+	@GetMapping("checkTodo")
+	public void checkTodo(@RequestParam("todo_idx") int todo_idx) {
+		todoService.checkTodo(todo_idx);
+	}
+	@ResponseBody
+	@GetMapping("uncheckedTodo")
+	public void uncheckedTodo(@RequestParam("todo_idx") int todo_idx) {
+		todoService.uncheckedTodo(todo_idx);
 	}
 }

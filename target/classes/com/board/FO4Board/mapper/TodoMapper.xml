@@ -20,4 +20,15 @@
 			from todo 
 			where todo_idx = #{todo_idx}
 	</delete>
+	<update id="checkTodo">
+		update todo
+			SET completed = 1
+			WHERE todo_idx = #{todo_idx}
+	</update>
+	<update id="uncheckedTodo">
+		update todo
+			SET completed = 0
+			WHERE todo_idx = #{todo_idx}
+	</update>
+
 </mapper>

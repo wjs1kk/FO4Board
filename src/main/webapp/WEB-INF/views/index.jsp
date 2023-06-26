@@ -78,8 +78,31 @@ function getTodoList(){
 			 }
 		  });
 	  }
-
 	}
+</script>
+<script type="text/javascript">
+	function checkTodo(todo_idx) {
+	  var query = {"todo_idx" : todo_idx};
+	  $.ajax({
+		 url: "checkTodo",
+		 type : "get",
+		 data : query,
+		 success : function(data){
+			 location.reload();
+		 }
+	  });
+	}
+	function uncheckedTodo(todo_idx) {
+		  var query = {"todo_idx" : todo_idx};
+		  $.ajax({
+			 url: "uncheckedTodo",
+			 type : "get",
+			 data : query,
+			 success : function(data){
+				 location.reload();
+			 }
+		  });
+		}
 </script>
 <!--todoList x 아이콘 css -->
 <style type="text/css">
@@ -395,15 +418,9 @@ function getTodoList(){
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
                   <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class=" btn-sm btn-light bg-white "  id="dropdownMenuDate2">
                      <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                      <a class="dropdown-item" href="#">January - March</a>
-                      <a class="dropdown-item" href="#">March - June</a>
-                      <a class="dropdown-item" href="#">June - August</a>
-                      <a class="dropdown-item" href="#">August - November</a>
-                    </div>
+                    </span>
                   </div>
                  </div>
                 </div>
@@ -417,7 +434,7 @@ function getTodoList(){
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">Top Products</p>
+                  <p class="card-title mb-0">주간 Best</p>
                   <div class="table-responsive">
                     <table class="table table-striped table-borderless">
                       <thead>
@@ -473,7 +490,7 @@ function getTodoList(){
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">Top Products</p>
+                  <p class="card-title mb-0">커뮤니티</p>
                   <div class="table-responsive">
                     <table class="table table-striped table-borderless">
                       <thead>
@@ -534,15 +551,30 @@ function getTodoList(){
 				<div id="todoList" class="list-wrapper pt-2">
 					<ul class="d-flex flex-column-reverse todo-list todo-list-custom">
 						<c:forEach items="${todoList }" var="todoList">
-							<li>
-								<div class="form-check form-check-flat">
-									<label class="form-check-label">
-										<input class="checkbox" type="checkbox">
-										${todoList.title }
-									<i class="input-helper"></i></label>
-								</div>
-								<span id="deleteTodo" onclick="deletTodo(${todoList.todo_idx})" class="ti-close" ></span>
-							</li>
+							
+								<c:if test="${todoList.completed eq '0' }">
+									<li>
+										<div class="form-check form-check-flat">
+											<label class="form-check-label">
+												<input class="checkbox" type="checkbox" onclick="checkTodo(${todoList.todo_idx })">
+												${todoList.title }
+											<i class="input-helper"></i></label>
+										</div>
+										<span id="deleteTodo" onclick="deletTodo(${todoList.todo_idx})" class="ti-close" ></span>
+									</li>
+								</c:if>
+								<c:if test="${todoList.completed eq '1' }">
+									<li class="completed">
+										<div class="form-check form-check-flat">
+											<label class="form-check-label">
+												<input class="checkbox" type="checkbox" checked="checked" onclick="uncheckedTodo(${todoList.todo_idx })">
+												${todoList.title }
+											<i class="input-helper"></i></label>
+										</div>
+										<span id="deleteTodo" onclick="deletTodo(${todoList.todo_idx})" class="ti-close" ></span>
+									</li>
+								</c:if>
+								
 						</c:forEach>						
 					</ul>
                   </div>

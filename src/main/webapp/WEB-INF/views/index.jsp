@@ -81,7 +81,20 @@ function getTodoList(){
 
 	}
 </script>
-
+<!--todoList x 아이콘 css -->
+<style type="text/css">
+	#deleteTodo{
+	    cursor: pointer;
+	    font-size: .7rem;
+	    font-weight: 600;
+	    width: 1.25rem;
+	    height: 1.25rem;
+	    line-height: 1.25rem;
+	    text-align: center;
+	    color: #a3a4a5 !important;
+	    margin-left: auto !important;
+	}
+</style>
 </head>
 <body>
 <body>
@@ -528,7 +541,7 @@ function getTodoList(){
 										${todoList.title }
 									<i class="input-helper"></i></label>
 								</div>
-								<span id="test11" onclick="deletTodo(${todoList.todo_idx})" class="remove ti-close" ></span>
+								<span id="deleteTodo" onclick="deletTodo(${todoList.todo_idx})" class="ti-close" ></span>
 							</li>
 						</c:forEach>						
 					</ul>

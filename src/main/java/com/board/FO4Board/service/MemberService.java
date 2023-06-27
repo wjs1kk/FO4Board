@@ -1,6 +1,8 @@
 package com.board.FO4Board.service;
 
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 
@@ -25,6 +27,9 @@ public class MemberService {
 	}
 	public String selectPasswd(String email) {
 		return mapper.selectPasswd(email);
+	}
+	public Map selectUser_idx(int member_idx) {
+		return mapper.selectUser_idx(member_idx);
 	}
 
 }

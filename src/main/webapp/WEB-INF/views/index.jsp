@@ -89,7 +89,9 @@ function getTodoList(){
 		 type : "get",
 		 data : query,
 		 success : function(data){
-			 location.reload();
+// 			 location.reload();
+// 			특정부분만 새로고침
+			 $('#todoListcard').load(location.href+' #todoListcard');
 		 }
 	  });
 	}
@@ -100,7 +102,9 @@ function getTodoList(){
 			 type : "get",
 			 data : query,
 			 success : function(data){
-				 location.reload();
+// 				 location.reload();
+// 			특정부분만 새로고침
+				 $('#todoListcard').load(location.href+' #todoListcard');
 			 }
 		  });
 		}
@@ -210,7 +214,7 @@ function getTodoList(){
             </div>
           </div>
 <!--           todolist -->
-         <div class="card">
+         <div id="todoListcard" class="card">
 			<div class="card-body">
 				<h4 class="card-title">To Do Lists</h4>
 				<div id="todoList" class="list-wrapper pt-2">
@@ -219,7 +223,7 @@ function getTodoList(){
 							
 								<c:if test="${todoList.completed eq '0' }">
 									<li>
-										<div class="form-check form-check-flat">
+										<div class="form-check form-check-flat" >
 											<label class="form-check-label">
 												<input class="checkbox" type="checkbox" onclick="checkTodo(${todoList.todo_idx })">
 												${todoList.title }
@@ -230,7 +234,7 @@ function getTodoList(){
 								</c:if>
 								<c:if test="${todoList.completed eq '1' }">
 									<li class="completed">
-										<div class="form-check form-check-flat">
+										<div class="form-check form-check-flat" > 
 											<label class="form-check-label">
 												<input class="checkbox" type="checkbox" checked="checked" onclick="uncheckedTodo(${todoList.todo_idx })">
 												${todoList.title }

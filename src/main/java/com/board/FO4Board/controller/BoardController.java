@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.board.FO4Board.service.BoardService;
 import com.board.FO4Board.service.MemberService;
+import com.board.FO4Board.service.ReplyService;
 
 @Controller
 public class BoardController {
@@ -20,6 +21,8 @@ public class BoardController {
 	private BoardService boardService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ReplyService replyService;
 	@GetMapping("board/main")
 	public String board(Model model) {
 		List<Map> boardList = boardService.selectBoardList();
@@ -50,13 +53,17 @@ public class BoardController {
 			int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
 			model.addAttribute("member", memberService.selectUser_idx(member_idx));
 		}
+//		게시글 내용
 		Map boardDetail = boardService.selectBoardDetail(num);
 		String content = org.springframework.web.util.HtmlUtils.htmlEscape(String.valueOf(boardDetail.get("content")));
 		content = content.replaceAll("\n","<br/>");
 		boardDetail.put("content", content);
-		
-		
 		model.addAttribute("boardDetail", boardDetail);
+//		댓글리스트
+		List<Map> replyList = replyService.selectReply(num);
+		if(replyList != null) {
+			model.addAttribute("replyList", replyList);
+		}
 		return "board/board-detail";
 	}
 }

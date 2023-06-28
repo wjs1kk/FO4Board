@@ -57,30 +57,35 @@
                   	<c:when test="${empty sessionScope.member_idx }">
 	                  	<div class="form-group">
 		                    <div class="form-control form-control-lg">댓글을 쓰려면 <a href="${pageContext.request.contextPath}/login">로그인</a>이 필요합니다.</div>
-		                    <button onclick="location.href='replyPro'" id="replybtn" type="button" class="btn btn-primary btn-rounded btn-fw">작성하기</button>
+		                    <button id="replybtn" type="button" class="btn btn-primary btn-rounded btn-fw">작성하기</button>
 		                </div>
                   	</c:when>
                   	<c:otherwise>
-                  		<div class="form-group">
-		                    <label>${member.name }님</label>
-		                    <textarea class="form-control form-control-lg" placeholder="댓글 작성 하기" ></textarea>
-		                    <button onclick="location.href='replyPro'" id="replybtn" type="button" class="btn btn-primary btn-rounded btn-fw">작성하기</button>
-		                </div>
+	                  	<form action="detail/replyPro?num=${param.num }" method="post">
+	                  		<div class="form-group">
+			                    <label>${member.name }님</label>
+			                    <textarea id="re_content" name="re_content" class="form-control form-control-lg" placeholder="댓글 작성 하기" ></textarea>
+			                    <button  id="replybtn" type="submit" class="btn btn-primary btn-rounded btn-fw">작성하기</button>
+			                </div>
+			            </form>
                   	</c:otherwise>
                   </c:choose>
                   <br>
 <!--                   댓글 목록 -->
 <!-- 				나중에 css 수정하기 -->
+				  <c:forEach items="${replyList }" var="replyList">	
                   <hr>
                   <div class="card-body">
-	                  <h4 class="card-title">작성자</h4>
+	                  <h4 class="card-title">${replyList.name }</h4>
 	                  <p class="card-description">
-	                    작성일 
+	                    <fmt:parseDate value="${ replyList.re_regdate }" pattern="yyyy-MM-dd'T'HH:mm" var="re_parsedDateTime" type="both" />
+					  	<fmt:formatDate pattern="YY년MM월dd일" value="${re_parsedDateTime }" />
 	                  </p>
 	                  <p class="lead">
-	                      댓글작성내용
+	                      ${replyList.re_content }
 	                  </p>
                   </div>
+                  </c:forEach>
 <!--                   댓글 목록 끝 -->
                 </div>
               </div>

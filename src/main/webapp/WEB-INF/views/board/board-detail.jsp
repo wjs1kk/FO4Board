@@ -20,6 +20,12 @@
 		 margin-top: 10px;
 	}
 </style>
+<style type="text/css">
+	.updatebtn{
+		 float: right;
+		 margin-top: 10px;
+	}
+</style>
 </head>
 <body>
 	<div class="container-scroller">
@@ -39,13 +45,25 @@
                     <p class="card-description">
                       ${boardDetail.name } &#183; 
                       <fmt:parseDate value="${ boardDetail.regdate }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-					  <fmt:formatDate pattern="MM.dd" value="${ parsedDateTime }" /> &#183; ${boardDetail.viewcnt }
+					  <fmt:formatDate pattern="MM.dd" value="${ parsedDateTime }" /> &#183; ${boardDetail.viewcnt } 
+					  <c:if test="${boardDetail.regdate != boardDetail.update_regdate }">
+					  	&#183; (수정됨)
+					  </c:if>
                     </p>
                     <p>
                       ${boardDetail.content }
                     </p>
+                    <br>
+                    <br>
+                    <c:if test="${sessionScope.member_idx==boardDetail.member_idx }">
+                    	<form action="deleteBoardPro?num=${param.num}" method="post">
+                    		<button type="submit" class="btn btn-outline-dark btn-sm updatebtn">삭제</button>
+                    	</form>
+	                    <button onclick="location.href='update?num=${param.num}'" type="button" class="btn btn-outline-dark btn-sm updatebtn">수정</button>
+                    </c:if>
                   </div>
                 </div>
+                
               </div>
               
               <div class="col-md-12 grid-margin stretch-card">

@@ -9,10 +9,12 @@
 			values(#{board_idx}, #{re_content}, #{member_idx})	
 	</insert>  
 	<select id="selectReply" resultType="Map">
-		select re_content, name, re_regdate from reply r 
+		select re_content, name, re_regdate 
+			from reply r 
 			inner join member m 
 					on r.member_idx = m.member_idx
 					where board_idx = #{board_idx}
 			
 	</select>
+	
 </mapper>

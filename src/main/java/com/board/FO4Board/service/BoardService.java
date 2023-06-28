@@ -21,4 +21,13 @@ public class BoardService {
 	public Map selectBoardDetail(int board_idx) {
 		return mapper.selectBoardDetail(board_idx);
 	}
+	public int deleteBoard(int board_idx) {
+		return mapper.deleteBoard(board_idx);
+	}
+	public int updateBoard(String title, String content, int board_idx) {
+		return mapper.updateBoard(title, content, board_idx);
+	}
+	public int updateViewcnt(int board_idx) {
+		return mapper.updateViewcnt(board_idx);
+	}
 }

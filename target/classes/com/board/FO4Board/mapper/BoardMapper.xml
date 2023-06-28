@@ -5,10 +5,12 @@
 
 <mapper namespace="com.board.FO4Board.mapper.BoardMapper">
 	<select id="selectBoardList" resultType="map">
-		select board_idx, b.member_idx, title, content, viewcnt, regdate, update_regdate, name 
+		select board_idx, b.member_idx, title, content, viewcnt, regdate, update_regdate, name
+			,(select count(*) from reply where b.board_idx=reply.board_idx) as re_count 
 			from board b 
 			inner join member m 
 			on b.member_idx = m.member_idx
+			order by board_idx desc;
 
 	</select>
 	<insert id="insertBoard">
@@ -21,6 +23,19 @@
 			inner join member m 
 			on b.member_idx = m.member_idx
 			where board_idx=#{board_idx}
-
 	</select>
+	<delete id="deleteBoard">
+		delete from board
+			where board_idx = #{board_idx}
+	</delete>
+	<update id="updateBoard">
+		UPDATE board
+		SET title=#{title}, content=#{content}
+		WHERE board_idx = #{board_idx}
+	</update>
+	<update id="updateViewcnt">
+		update board
+		set viewcnt = viewcnt + 1
+		where board_idx = #{board_idx}
+	</update>
 </mapper>

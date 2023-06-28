@@ -89,9 +89,7 @@ function getTodoList(){
 		 type : "get",
 		 data : query,
 		 success : function(data){
-// 			 location.reload();
-// 			특정부분만 새로고침
-			 $('#todoListcard').load(location.href+' #todoListcard');
+			 location.reload();
 		 }
 	  });
 	}
@@ -102,9 +100,7 @@ function getTodoList(){
 			 type : "get",
 			 data : query,
 			 success : function(data){
-// 				 location.reload();
-// 			특정부분만 새로고침
-				 $('#todoListcard').load(location.href+' #todoListcard');
+				 location.reload();
 			 }
 		  });
 		}
@@ -133,7 +129,7 @@ function getTodoList(){
       <!-- partial:partials/_sidebar.html -->
       <jsp:include page="inc/left-side.jsp" />
       <!-- partial -->
-      <div class="main-panel">
+      <div  class="main-panel">
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin">

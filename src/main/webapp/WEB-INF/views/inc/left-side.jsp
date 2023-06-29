@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script>
+	function mypage() {
+		location.href="${pageContext.request.contextPath }/mypage/main";
+	}
+</script>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="./">
+      <a class="nav-link" href="${pageContext.request.contextPath }/">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">메인</span>
       </a>
@@ -17,7 +22,7 @@
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/board/main">자유게시판</a></li>
-          <li class="nav-item"> <a class="nav-link" href="#">모임&스터디</a></li>
+          <li class="nav-item"> <a class="nav-link" href="">모임&스터디</a></li>
         </ul>
       </div>
     </li>
@@ -34,7 +39,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="#" onclick="mypage()">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">마이페이지</span>
       </a>

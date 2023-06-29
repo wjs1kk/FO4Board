@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.FO4Board.mapper.MypageMapper">
+	<update id="updateMember">
+		UPDATE member
+		SET name=#{name}, email=#{email}
+		WHERE member_idx = #{member_idx}
+	</update>
+	<update id="udatePassword">
+		update member
+		set password = #{new_password}
+		where member_idx = #{member_idx}
+	</update>
+	<delete id="deleteMember">
+		DELETE FROM member
+		WHERE member_idx = #{member_idx}
+	</delete>
+</mapper>

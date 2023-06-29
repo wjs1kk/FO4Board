@@ -26,6 +26,18 @@
 		 margin-top: 10px;
 	}
 </style>
+<script type="text/javascript">
+	function board_delete(num) {
+		result = window.confirm("게시물을 삭제 하시겠습니까?");
+		if(result){
+			let f = document.createElement('form');
+			f.setAttribute('method', 'post');	
+			f.setAttribute('action', 'deleteBoardPro?num='+num);
+			document.body.appendChild(f);
+			f.submit();
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="container-scroller">
@@ -56,16 +68,12 @@
                     <br>
                     <br>
                     <c:if test="${sessionScope.member_idx==boardDetail.member_idx }">
-                    	<form action="deleteBoardPro?num=${param.num}" method="post">
-                    		<button type="submit" class="btn btn-outline-dark btn-sm updatebtn">삭제</button>
-                    	</form>
+                    	<button onclick='board_delete(${param.num})' type="button" class="btn btn-outline-dark btn-sm updatebtn">삭제</button>
 	                    <button onclick="location.href='update?num=${param.num}'" type="button" class="btn btn-outline-dark btn-sm updatebtn">수정</button>
                     </c:if>
                   </div>
                 </div>
-                
               </div>
-              
               <div class="col-md-12 grid-margin stretch-card">
               <hr>
               <div class="card">

@@ -24,7 +24,7 @@ public class MypageController {
 	@GetMapping("mypage/main")
 	public String mypage_main(HttpSession session, Model model) {
 		if(session.getAttribute("member_idx") == null) {
-			model.addAttribute("msg", "잘못된 접근입니다.");
+			model.addAttribute("msg", "로그인이 필요한 기능입니다.");
 			return "fail_back";
 		}
 		Map member = memberService.selectUser_idx(Integer.parseInt(String.valueOf(session.getAttribute("member_idx"))));

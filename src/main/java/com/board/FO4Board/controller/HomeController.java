@@ -1,7 +1,10 @@
 package com.board.FO4Board.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.board.FO4Board.service.BoardService;
 import com.board.FO4Board.service.MemberService;
 import com.board.FO4Board.service.TodoService;
 import com.board.FO4Board.vo.MemberVO;
@@ -25,15 +29,35 @@ public class HomeController {
 	private MemberService memberService;
 	@Autowired
 	private TodoService todoService;
+	@Autowired
+	private BoardService boardService;
 	@GetMapping("/")
 	public String home(Model model, HttpSession session) {
 		if(session.getAttribute("member_idx") == null) {
+			List<Map> boardList = boardService.selectBoardList_ten();
+			model.addAttribute("boardList",boardList);
+			LocalDate now = LocalDate.now();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy년MM월dd일");
+	        String formatedNow = now.format(formatter);
+	        model.addAttribute("today", formatedNow);
+	        
+	        String dayOfWeek = now.getDayOfWeek().toString();
+	        model.addAttribute("dayOfWeek",dayOfWeek);
 			return "index";
 		}
 		int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
 		List<TodoVO> todoList = todoService.selectTodo(member_idx);	
 		model.addAttribute("todoList",todoList);
-		return "index";
+		
+		List<Map> boardList = boardService.selectBoardList_ten();
+		model.addAttribute("boardList",boardList);
+		LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy년MM월dd일");
+        String formatedNow = now.format(formatter);
+        model.addAttribute("today", formatedNow);
+        String dayOfWeek = now.getDayOfWeek().toString();
+        model.addAttribute("dayOfWeek",dayOfWeek);
+        return "index";
 	}
 	@GetMapping("login")
 	public String login() {

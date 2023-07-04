@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,7 +143,7 @@ function getTodoList(){
                  <div class="justify-content-end d-flex">
                   <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                     <span class=" btn-sm btn-light bg-white "  id="dropdownMenuDate2">
-                     <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
+                     <i class="mdi mdi-calendar"></i> Today ${today }(${dayOfWeek })
                     </span>
                   </div>
                  </div>
@@ -182,24 +183,28 @@ function getTodoList(){
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">커뮤니티</p>
+                  <p onclick="location.href='board/main'" class="card-title mb-0 " style="cursor: pointer;">커뮤니티</p>
                   <div class="table-responsive">
                     <table class="table table-striped table-borderless">
                       <thead>
                         <tr>
-                          <th>Product</th>
-                          <th>Price</th>
-                          <th>Date</th>
+                          <th>제목</th>
+                          <th>글쓴이</th>
+                          <th>작성일</th>
                           
                         </tr>  
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Search Engine Marketing</td>
-                          <td class="font-weight-bold">$362</td>
-                          <td>21 Sep 2018</td>
+                      <c:forEach items="${boardList }" var="boardList">
+                      	<tr>
+                          <td><a href='board/detail?num=${boardList.board_idx }'>${boardList.title }</a></td>
+                          <td class="font-weight-bold">${boardList.name }</td>
+                          <td>
+							<fmt:parseDate value="${ boardList.regdate }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+						  	<fmt:formatDate pattern="yy.MM.dd" value="${ parsedDateTime }" />
+						  </td>
                         </tr>
-                        
+                      </c:forEach>
                       </tbody>
                     </table>
                   </div>

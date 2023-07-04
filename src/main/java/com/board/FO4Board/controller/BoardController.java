@@ -81,6 +81,7 @@ public class BoardController {
 		if(session.getAttribute("member_idx") != null){
 			int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
 			model.addAttribute("member", memberService.selectUser_idx(member_idx));
+			model.addAttribute("heart", boardService.selectHeart(num, member_idx));
 		}
 //		게시글 내용
 		Map boardDetail = boardService.selectBoardDetail(num);
@@ -88,11 +89,14 @@ public class BoardController {
 		content = content.replaceAll("\n","<br/>");
 		boardDetail.put("content", content);
 		model.addAttribute("boardDetail", boardDetail);
+		System.out.println(boardDetail.get("update_regdate"));
 //		댓글리스트
 		List<Map> replyList = replyService.selectReply(num);
 		if(replyList != null) {
 			model.addAttribute("replyList", replyList);
 		}
+
+		
 		return "board/board-detail";
 	}
 	@PostMapping("board/deleteBoardPro")

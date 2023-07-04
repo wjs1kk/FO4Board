@@ -30,4 +30,13 @@ public class BoardService {
 	public int updateViewcnt(int board_idx) {
 		return mapper.updateViewcnt(board_idx);
 	}
+	public List<Map> selectBoardList_ten(){
+		return mapper.selectBoardList_ten();
+	}
+	public Map selectHeart(int board_idx, int member_idx) {
+		return mapper.selectHeart(board_idx, member_idx) != null? mapper.selectHeart(board_idx, member_idx) : null;
+	}
+	public int insertHeart(int board_idx, int member_idx) {
+		return mapper.insertHeart(board_idx, member_idx);
+	}
 }

@@ -11,7 +11,6 @@
 			inner join member m 
 			on b.member_idx = m.member_idx
 			order by board_idx desc;
-
 	</select>
 	<insert id="insertBoard">
 		insert into board (member_idx, title, content )
@@ -38,4 +37,21 @@
 		set viewcnt = viewcnt + 1
 		where board_idx = #{board_idx}
 	</update>
+	<select id="selectBoardList_ten" resultType="map">
+		select board_idx, b.member_idx, title, content, viewcnt, regdate, update_regdate, name
+			,(select count(*) from reply where b.board_idx=reply.board_idx) as re_count 
+			from board b 
+			inner join member m 
+			on b.member_idx = m.member_idx
+			order by board_idx desc limit 5;
+	</select>
+	<select id="selectHeart" resultType="map">
+		select * 
+			from heart 
+			where board_idx = #{board_idx} and member_idx = #{member_idx}
+	</select>
+	<insert id="insertHeart">
+		insert into heart
+			values(null, #{board_idx}, #{member_idx})
+	</insert>
 </mapper>

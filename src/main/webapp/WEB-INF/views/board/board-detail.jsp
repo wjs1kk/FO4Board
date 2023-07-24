@@ -38,6 +38,9 @@
 		}
 	}
 </script>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 	<div class="container-scroller">
@@ -88,9 +91,6 @@
 							</c:choose>
 						</c:when>
 					</c:choose>
-                    
-					
-					
                     <c:if test="${sessionScope.member_idx==boardDetail.member_idx }">
                     	<button onclick='board_delete(${param.num})' type="button" class="btn btn-outline-dark btn-sm updatebtn">삭제</button>
 	                    <button onclick="location.href='update?num=${param.num}'" type="button" class="btn btn-outline-dark btn-sm updatebtn">수정</button>

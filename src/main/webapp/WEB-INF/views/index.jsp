@@ -20,6 +20,10 @@
 <script type="text/javascript">
 $(function() {
 	$('#addTodo').click(function(){
+		if($("#title").val()==''){
+			alert('내용을 입력해주세요');
+		}
+		else{
 		$.ajax({
 			type : "post",
 			url : "insertTodo",
@@ -37,6 +41,7 @@ $(function() {
 	               location.reload();
 	           }
 		});
+		}
 	});	
 });
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.FO4Board.service.BoardService;
 import com.board.FO4Board.service.MemberService;
@@ -95,8 +96,6 @@ public class BoardController {
 		if(replyList != null) {
 			model.addAttribute("replyList", replyList);
 		}
-
-		
 		return "board/board-detail";
 	}
 	@PostMapping("board/deleteBoardPro")
@@ -122,4 +121,9 @@ public class BoardController {
 		boardService.updateBoard(title, content, num);
 		return "redirect:/board/detail?num="+num;
 	}
+//	@ResponseBody
+//	@PostMapping("saveHeart")
+//	public Map saveHeart(HttpSession session) {
+//		
+//	}
 }

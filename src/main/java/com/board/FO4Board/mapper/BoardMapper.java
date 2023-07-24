@@ -13,6 +13,6 @@ public interface BoardMapper {
 	public int updateBoard(@Param("title") String title,@Param("content") String content,@Param("board_idx") int board_idx);
 	public int updateViewcnt(int board_idx);
 	public List<Map> selectBoardList_ten();
-	public Map selectHeart(int board_idx, int member_idx);
+	public Map selectHeart(@Param("board_idx") int board_idx,@Param("member_idx") int member_idx);
 	public int insertHeart(int board_idx, int member_idx);
 }

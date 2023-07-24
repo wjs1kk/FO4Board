@@ -45,6 +45,7 @@
 			on b.member_idx = m.member_idx
 			order by board_idx desc limit 5;
 	</select>
+	
 	<select id="selectHeart" resultType="map">
 		select * 
 			from heart 
@@ -54,4 +55,9 @@
 		insert into heart
 			values(null, #{board_idx}, #{member_idx})
 	</insert>
+	<delete id="cancelHeart">
+		DELETE
+			FROM heart
+			WHERE board_idx = #{board_idx} and member_idx = #{member_idx}
+	</delete>
 </mapper>

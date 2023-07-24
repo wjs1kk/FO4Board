@@ -39,4 +39,7 @@ public class BoardService {
 	public int insertHeart(int board_idx, int member_idx) {
 		return mapper.insertHeart(board_idx, member_idx);
 	}
+	public int cancelHeart(int board_idx, int member_idx) {
+		return mapper.cancelHeart(board_idx, member_idx);
+	}
 }

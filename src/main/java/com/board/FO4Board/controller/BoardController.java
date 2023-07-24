@@ -1,5 +1,6 @@
 package com.board.FO4Board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.FO4Board.service.BoardService;
@@ -121,9 +123,14 @@ public class BoardController {
 		boardService.updateBoard(title, content, num);
 		return "redirect:/board/detail?num="+num;
 	}
-//	@ResponseBody
-//	@PostMapping("saveHeart")
-//	public Map saveHeart(HttpSession session) {
-//		
-//	}
+	@ResponseBody
+	@PostMapping("board/addHeart")
+	public void addHeart(@RequestBody HashMap<String, Integer> map) {
+		boardService.insertHeart(map.get("board_idx"), map.get("member_idx"));
+	}
+	@ResponseBody
+	@PostMapping("board/cancelHeart")
+	public void cancelHeart(@RequestBody HashMap<String, Integer> map) {
+		boardService.cancelHeart(map.get("board_idx"), map.get("member_idx"));
+	}
 }

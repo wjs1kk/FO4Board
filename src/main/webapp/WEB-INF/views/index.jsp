@@ -161,7 +161,7 @@ function getTodoList(){
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title mb-0">주간 Best</p>
+                  <p class="card-title mb-0">인기글</p>
                   <div class="table-responsive">
                     <table class="table table-striped table-borderless">
                       <thead>
@@ -169,15 +169,20 @@ function getTodoList(){
                           <th>제목</th>
                           <th>글쓴이</th>
                           <th>Date</th>
-                          
                         </tr>  
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Search Engine Marketing</td>
-                          <td class="font-weight-bold">$362</td>
-                          <td>21 Sep 2018</td>
+                      
+                        <c:forEach items="${popularBoardList }" var="popularBoardList">
+                      	<tr>
+                          <td><a href='board/detail?num=${popularBoardList.board_idx }'>${popularBoardList.title }</a></td>
+                          <td class="font-weight-bold">${popularBoardList.name }</td>
+                          <td>
+							<fmt:parseDate value="${ popularBoardList.regdate }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+						  	<fmt:formatDate pattern="yy.MM.dd" value="${ parsedDateTime }" />
+						  </td>
                         </tr>
+                      </c:forEach>
                         
                       </tbody>
                     </table>

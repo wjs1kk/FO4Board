@@ -16,4 +16,7 @@ public interface BoardMapper {
 	public Map selectHeart(@Param("board_idx") int board_idx,@Param("member_idx") int member_idx);
 	public int insertHeart(@Param("board_idx") int board_idx,@Param("member_idx") int member_idx);
 	public int cancelHeart(@Param("board_idx") int board_idx,@Param("member_idx") int member_idx);
+	public int boardAddHeart(int board_idx);
+	public int boardCancelHeart(int board_idx);
+	public List<Map> selectPopular();
 }

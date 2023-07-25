@@ -60,4 +60,22 @@
 			FROM heart
 			WHERE board_idx = #{board_idx} and member_idx = #{member_idx}
 	</delete>
+	
+	<update id="boardAddHeart">
+		update board 
+			set heartcnt = heartcnt + 1 
+			where board_idx = #{board_idx};
+	</update>
+	<update id="boardCancelHeart">
+		update board 
+				set heartcnt = heartcnt - 1 
+				where board_idx = #{board_idx};
+	</update>
+	<select id="selectPopular" resultType="map">
+		select board_idx, b.member_idx, title, content, viewcnt, regdate, update_regdate, name
+				from board b 
+				inner join member m 
+				on b.member_idx = m.member_idx
+				order by heartcnt desc limit 5;
+	</select> 
 </mapper>

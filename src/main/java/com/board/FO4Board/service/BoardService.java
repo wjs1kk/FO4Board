@@ -42,4 +42,13 @@ public class BoardService {
 	public int cancelHeart(int board_idx, int member_idx) {
 		return mapper.cancelHeart(board_idx, member_idx);
 	}
+	public int boardCancelHeart(int board_idx) {
+		return mapper.boardCancelHeart(board_idx);
+	}
+	public int boardAddHeart(int board_idx) {
+		return mapper.boardAddHeart(board_idx);
+	}
+	public List<Map> selectPopular() {
+		return mapper.selectPopular();
+	}
 }

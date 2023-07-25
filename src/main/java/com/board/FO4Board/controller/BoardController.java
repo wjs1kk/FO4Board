@@ -127,10 +127,12 @@ public class BoardController {
 	@PostMapping("board/addHeart")
 	public void addHeart(@RequestBody HashMap<String, Integer> map) {
 		boardService.insertHeart(map.get("board_idx"), map.get("member_idx"));
+		boardService.boardAddHeart(map.get("board_idx"));
 	}
 	@ResponseBody
 	@PostMapping("board/cancelHeart")
 	public void cancelHeart(@RequestBody HashMap<String, Integer> map) {
 		boardService.cancelHeart(map.get("board_idx"), map.get("member_idx"));
+		boardService.boardCancelHeart(map.get("board_idx"));
 	}
 }

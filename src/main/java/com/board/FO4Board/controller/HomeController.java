@@ -35,7 +35,10 @@ public class HomeController {
 	public String home(Model model, HttpSession session) {
 		if(session.getAttribute("member_idx") == null) {
 			List<Map> boardList = boardService.selectBoardList_ten();
+			List<Map> popularBoardList = boardService.selectPopular();
+			
 			model.addAttribute("boardList",boardList);
+			model.addAttribute("popularBoardList", popularBoardList);
 			LocalDate now = LocalDate.now();
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy년MM월dd일");
 	        String formatedNow = now.format(formatter);
@@ -48,9 +51,10 @@ public class HomeController {
 		int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
 		List<TodoVO> todoList = todoService.selectTodo(member_idx);	
 		model.addAttribute("todoList",todoList);
-		
+		List<Map> popularBoardList = boardService.selectPopular();
 		List<Map> boardList = boardService.selectBoardList_ten();
 		model.addAttribute("boardList",boardList);
+		model.addAttribute("popularBoardList", popularBoardList);
 		LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy년MM월dd일");
         String formatedNow = now.format(formatter);

@@ -1,5 +1,6 @@
 package com.board.FO4Board.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import com.board.FO4Board.vo.MemberVO;
@@ -10,4 +11,5 @@ public interface MemberMapper {
 	public String isAdmin(String email);
 	public String selectPasswd(String email);
 	public Map selectUser_idx(int member_idx);
+	public List<Map> selectUserAll();
 }

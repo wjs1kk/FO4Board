@@ -1,6 +1,7 @@
 package com.board.FO4Board.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class MemberService {
 	}
 	public Map selectUser_idx(int member_idx) {
 		return mapper.selectUser_idx(member_idx);
+	}
+	public List<Map> selectUserAll() {
+		return mapper.selectUserAll();
 	}
 
 }

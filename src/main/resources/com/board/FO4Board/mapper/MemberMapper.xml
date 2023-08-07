@@ -42,5 +42,9 @@
 		FROM member
 		WHERE email = #{email}
 	</select>
-	
+	<select id="selectUserAll" resultType="map">
+		select * 
+		from member
+		where is_admin=0
+	</select>
   </mapper>

@@ -4,25 +4,14 @@
     
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-     <a class="navbar-brand brand-logo mr-5" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath }/resources/images/logo.svg" class="mr-2" alt="logo"/></a>
+     <a class="navbar-brand brand-logo mr-5" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath }/resources/images/logo.PNG" class="mr-2" alt="logo"/></a>
      <a class="navbar-brand brand-logo-mini" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath }/resources/images/logo-mini.svg" alt="logo"/></a>
    </div>
    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
        <span class="icon-menu"></span>
      </button>
-     <ul class="navbar-nav mr-lg-2">
-       <li class="nav-item nav-search d-none d-lg-block">
-         <div class="input-group">
-           <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-             <span class="input-group-text" id="search">
-               <i class="icon-search"></i>
-             </span>
-           </div>
-           <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-         </div>
-       </li>
-     </ul>
+     
      
 <!--         로그인 유무에따른 화면 -->
      <c:choose>
@@ -33,34 +22,16 @@
        </div>
      	</c:when>
      	<c:when test="${sessionScope.member_idx == 0 }">
-     		<div class="navbar-nav navbar-nav-right">
-         <a href="#" class="nav-item text-dark">관리자페이지</a>
-         <a href="${pageContext.request.contextPath}/logout" class="nav-item text-dark">로그아웃</a>
-       </div>
+	     	<div class="navbar-nav navbar-nav-right">
+	         <a href="${pageContext.request.contextPath}/admin/main" class="nav-item text-dark">관리자페이지</a>  
+	         <a href="${pageContext.request.contextPath}/logout" class="nav-item text-dark">로그아웃</a>
+	        </div>
      	</c:when>
      	<c:otherwise>
-     		<ul class="navbar-nav navbar-nav-right">
-         <li class="nav-item nav-profile dropdown">
-           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-             <img src="${pageContext.request.contextPath }/resources/images/faces/face28.jpg" alt="profile"/>
-           </a>
-           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-             <a href="${pageContext.request.contextPath }/mypage/main" class="dropdown-item">
-               <i class="ti-settings text-primary"></i>
-               내 프로필
-             </a>
-             <a class="dropdown-item" href="${pageContext.request.contextPath }/logout">
-               <i class="ti-power-off text-primary"></i>
-               로그아웃
-             </a>
-           </div>
-         </li>
-         <li class="nav-item nav-settings d-none d-lg-flex">
-           <a class="nav-link" href="#">
-             <i class="icon-ellipsis"></i>
-           </a>
-         </li>
-       </ul>
+	     	<div class="navbar-nav navbar-nav-right">
+	     	 <a href="${pageContext.request.contextPath}/mypage/main" class="nav-item text-dark">${sessionScope.member_name }님 환영합니다</a>  
+	         <a href="${pageContext.request.contextPath}/logout" class="nav-item text-dark">로그아웃</a>
+	        </div>
      	</c:otherwise>
       </c:choose>
       

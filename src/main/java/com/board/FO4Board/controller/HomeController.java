@@ -83,6 +83,8 @@ public class HomeController {
 		else {
 			MemberVO member = memberService.selectUser(email);
 			session.setAttribute("member_idx", member.getMember_idx());
+			session.setAttribute("member_name", member.getName());
+			System.out.println(session.getAttribute("member_name"));
 		}
 		return "redirect:/";
 	}

@@ -47,4 +47,14 @@
 		from member
 		where is_admin=0
 	</select>
+	<select id="memberEmailCheck" resultType="String">
+		select email 
+			from member
+			where email = #{email}
+	</select>
+	<select id="memberNameCheck" resultType="String">
+		select name 
+			from member
+			where name = #{name}
+	</select>
   </mapper>

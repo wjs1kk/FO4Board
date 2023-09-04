@@ -29,6 +29,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">자유게시판</h4>
+
                   <button onclick="location.href='write'" class="btn btn-primary btn-rounded btn-fw" type="button"  >
                       작성하기
                     </button>
@@ -63,11 +64,30 @@
                       </tbody>
                     </table>
                   </div>
+                  <div style="display: block; text-align: center;">		
+		<c:if test="${paging.startPage != 1 }">
+			<a href="main?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="main?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="main?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        
         <!-- content-wrapper ends -->
         <!-- partial:../resources/partials/_footer.html -->
         <footer class="footer">

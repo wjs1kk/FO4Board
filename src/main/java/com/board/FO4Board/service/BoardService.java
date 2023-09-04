@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.board.FO4Board.mapper.BoardMapper;
+import com.board.FO4Board.vo.PageVO;
 
 @Service
 public class BoardService {
 	@Autowired
 	private BoardMapper mapper;
-	public List<Map> selectBoardList() {
-		return mapper.selectBoardList();
+	public List<Map<String, Object>> selectBoardList(PageVO pageVO) {
+		return mapper.selectBoardList(pageVO);
 	}
 	public int insertBoard(int member_idx, String title, String content) {
 		return mapper.insertBoard(member_idx, title, content);
@@ -50,5 +51,8 @@ public class BoardService {
 	}
 	public List<Map> selectPopular() {
 		return mapper.selectPopular();
+	}
+	public Integer countBoardList() {
+		return mapper.countBoardList();
 	}
 }

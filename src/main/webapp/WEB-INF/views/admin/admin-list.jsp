@@ -21,7 +21,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">회원목록</h1>
+                    <h1 class="mt-4">관리자 목록</h1>
                     <ol class="breadcrumb mb-4">
                     </ol>
                     <div class="card mb-4">
@@ -36,12 +36,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${user }" var="user">
+                                <c:forEach items="${selectAdminList }" var="selectAdminList">
                                 	<tr>
-                                        <td>${user.member_idx }</td>
-                                        <td>${user.name }</td>
-                                        <td>${user.email }</td>
-                                        <td>${user.registration_date }</td>
+                                        <td>${selectAdminList.member_idx }</td>
+                                        <td>${selectAdminList.name }</td>
+                                        <td>${selectAdminList.email }</td>
+                                        <td>${selectAdminList.registration_date }</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

@@ -1,11 +1,13 @@
 package com.board.FO4Board.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.FO4Board.service.BoardService;
 import com.board.FO4Board.service.MemberService;
@@ -111,5 +114,34 @@ public class HomeController {
 			return "signup";
 		}
 		return "redirect:/login";
+	}
+	@PostMapping("memberEmailCheck")
+	public void memberEmailCheck(@RequestParam(defaultValue = "") String email, HttpServletResponse response) {
+		try {
+			// 사용중인 member_email이 없으면 view페이지로 true 있으면 false를 보냄!
+			String member_email = memberService.memberEmailCheck(email);
+			System.out.println(email);
+			if(member_email == null) {
+				response.getWriter().print("true");
+			}else {
+				response.getWriter().print("false");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	@PostMapping("memberNameCheck")
+	public void memberNameCheck(@RequestParam(defaultValue = "") String name, HttpServletResponse response) {
+		try {
+			String member_name = memberService.memberNameCheck(name);
+			System.out.println(member_name);
+			if(name == null) {
+				response.getWriter().print("true");
+			}else {
+				response.getWriter().print("false");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

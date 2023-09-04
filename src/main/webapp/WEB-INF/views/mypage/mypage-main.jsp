@@ -23,6 +23,54 @@
 		}
 	}
 </script>
+<!-- <script type="text/javascript"> -->
+// $(function() {
+// 	$("#emailCheck").on("click", function() {
+// 		if(emailReg.exec($("#email").val())){
+// 			$.ajax({
+// 				type: "POST",
+// 				url: "memberEmailCheck",
+// 				data: {
+// 					"email": $("#email").val()
+// 					},
+// 				success: function(res) {
+// 					if(res == "true"){
+// 						alert("사용 가능한 이메일 입니다!")
+// 						$("#emailCheckValue").val("1");
+// 					}else{
+// 						alert("이미 사용중인 이메일 입니다!")
+// 						$("#emailCheckValue").val("0");
+// 					};
+// 				}
+// 			})
+// 		}else{
+// 			alert("이메일 형식을 확인해주세요!")
+// 		}
+// 	})
+
+// 	$("#nameCheck").on("click", function() {
+// 		if(emailReg.exec($("#name").val())){
+// 			$.ajax({
+// 				type: "POST",
+// 				url: "memberNameCheck",
+// 				data: {
+// 					"name": $("#name").val()
+// 					},
+// 				success: function(res) {
+// 					if(res == "true"){
+// 						alert("사용 가능한 닉네임 입니다!")
+// 						$("#nameCheckValue").val("1");
+// 					}else{
+// 						alert("이미 사용중인 닉네임 입니다!")
+// 						$("#nameCheckValue").val("0");
+// 					};
+// 				}
+// 			})
+// 		}else{
+// 			alert("닉네임 형식을 확인해주세요!")
+// 		}
+// 	})
+<!-- </script> -->
 </head>
 <body>
 	<div class="container-scroller">

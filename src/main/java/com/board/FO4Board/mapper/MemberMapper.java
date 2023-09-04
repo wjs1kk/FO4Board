@@ -12,4 +12,6 @@ public interface MemberMapper {
 	public String selectPasswd(String email);
 	public Map selectUser_idx(int member_idx);
 	public List<Map> selectUserAll();
+	public String memberEmailCheck(String email);
+	public String memberNameCheck(String name);
 }

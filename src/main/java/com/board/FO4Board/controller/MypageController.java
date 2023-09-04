@@ -32,7 +32,11 @@ public class MypageController {
 		return "mypage/mypage-main";
 	}
 	@PostMapping("mypage/updatePro")
-	public String mypage_updatePro(HttpSession session, String name, String email) {
+	public String mypage_updatePro(HttpSession session, String name, String email, Model model) {
+		if(session.getAttribute("member_idx") == null) {
+			model.addAttribute("msg", "로그인이 필요한 기능입니다.");
+			return "fail_back";
+		}
 		int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
 		mypageService.updateMember(name, email, member_idx);
 		return "redirect:/mypage/main";
@@ -50,7 +54,7 @@ public class MypageController {
 		String oldPassword = String.valueOf(memberService.selectUser_idx(member_idx).get("password"));
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		if (!passwordEncoder.matches(password, oldPassword)) {
-			model.addAttribute("msg", "현재 비밀번호와 일치하지 않습니다.");
+			model.addAttribute("msg", "현재 비밀번호가 일치하지 않습니다.");
 			return "fail_back";
 		}
 		
@@ -64,7 +68,11 @@ public class MypageController {
 		return "fail_back";
 	}
 	@PostMapping("mypage/withDrawal")
-	public String withDrawal(HttpSession session) {
+	public String withDrawal(HttpSession session, Model model) {
+		if(session.getAttribute("member_idx") == null) {
+			model.addAttribute("msg", "로그인이 필요한 기능입니다.");
+			return "fail_back";
+		}
 		int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
 		mypageService.deleteMember(member_idx);
 		session.invalidate();

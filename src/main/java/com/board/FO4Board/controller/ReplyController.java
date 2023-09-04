@@ -19,6 +19,7 @@ public class ReplyController {
 		int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
 		int success = replyService.insertReply(num, re_content, member_idx);
 		if(success > 0) {
+			
 			return "redirect:/board/detail?num="+num;
 		}
 		model.addAttribute("msg", "댓글 작성 실패하셨습니다.");

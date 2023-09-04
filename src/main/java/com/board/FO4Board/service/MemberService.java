@@ -35,5 +35,11 @@ public class MemberService {
 	public List<Map> selectUserAll() {
 		return mapper.selectUserAll();
 	}
+	public String memberEmailCheck(String email) {
+		return mapper.memberEmailCheck(email);
+	}
+	public String memberNameCheck(String name) {
+		return mapper.memberNameCheck(name);
+	}
 
 }

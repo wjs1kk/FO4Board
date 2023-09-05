@@ -12,7 +12,7 @@
 			inner join member m 
 			on b.member_idx = m.member_idx
 			order by board_idx desc
-			LIMIT #{start}, 9;
+			LIMIT #{start}, 10;
 			
 	</select>
 

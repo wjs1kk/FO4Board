@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.board.FO4Board.service.AdminService;
+import com.board.FO4Board.service.BoardService;
 import com.board.FO4Board.service.MemberService;
 
 @Controller
@@ -19,6 +20,9 @@ public class AdminController {
 	private MemberService memberService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private BoardService boardService;
+	
 	@GetMapping("admin/main")
 	public String index(Model model, HttpSession session) {
 		if(Integer.parseInt(String.valueOf(session.getAttribute("member_idx"))) != 0) {
@@ -34,5 +38,11 @@ public class AdminController {
 		}
 		model.addAttribute("selectAdminList", adminService.selectAdminList());
 		return "admin/admin-list";
+	}
+	@GetMapping("admin/userwrite")
+	public String userwrite(Model model, int num) {
+		model.addAttribute("user", memberService.selectUser_idx(num));
+		model.addAttribute("memberWriteList",adminService.memberWriteList(num));
+		return "admin/userwrite";
 	}
 }

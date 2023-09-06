@@ -134,8 +134,8 @@ public class HomeController {
 	public void memberNameCheck(@RequestParam(defaultValue = "") String name, HttpServletResponse response) {
 		try {
 			String member_name = memberService.memberNameCheck(name);
-			System.out.println(member_name);
-			if(name == null) {
+			System.out.println(name);
+			if(member_name == null) {
 				response.getWriter().print("true");
 			}else {
 				response.getWriter().print("false");

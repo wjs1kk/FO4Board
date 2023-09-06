@@ -23,54 +23,19 @@
 		}
 	}
 </script>
-<!-- <script type="text/javascript"> -->
-// $(function() {
-// 	$("#emailCheck").on("click", function() {
-// 		if(emailReg.exec($("#email").val())){
-// 			$.ajax({
-// 				type: "POST",
-// 				url: "memberEmailCheck",
-// 				data: {
-// 					"email": $("#email").val()
-// 					},
-// 				success: function(res) {
-// 					if(res == "true"){
-// 						alert("사용 가능한 이메일 입니다!")
-// 						$("#emailCheckValue").val("1");
-// 					}else{
-// 						alert("이미 사용중인 이메일 입니다!")
-// 						$("#emailCheckValue").val("0");
-// 					};
-// 				}
-// 			})
-// 		}else{
-// 			alert("이메일 형식을 확인해주세요!")
-// 		}
-// 	})
+<script type="text/javascript">
 
-// 	$("#nameCheck").on("click", function() {
-// 		if(emailReg.exec($("#name").val())){
-// 			$.ajax({
-// 				type: "POST",
-// 				url: "memberNameCheck",
-// 				data: {
-// 					"name": $("#name").val()
-// 					},
-// 				success: function(res) {
-// 					if(res == "true"){
-// 						alert("사용 가능한 닉네임 입니다!")
-// 						$("#nameCheckValue").val("1");
-// 					}else{
-// 						alert("이미 사용중인 닉네임 입니다!")
-// 						$("#nameCheckValue").val("0");
-// 					};
-// 				}
-// 			})
-// 		}else{
-// 			alert("닉네임 형식을 확인해주세요!")
-// 		}
-// 	})
-<!-- </script> -->
+function checkForm() {
+		let nameReg = /^[가-힣a-zA-Z0-9]{2,5}$/;
+		if(!nameReg.exec($("#name").val())){
+			alert("닉네임을 확인해주세요!")
+			return false;
+		}
+		
+		
+	}
+	
+</script>
 </head>
 <body>
 	<div class="container-scroller">
@@ -88,16 +53,16 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">회원정보</h4>
-                  <form action="updatePro" method="post" class="forms-sample">
+                  <form action="updatePro" method="post" class="forms-sample" onsubmit="return checkForm();">
                     <div class="form-group">
                       <label >이름</label>
                       <input id="name" name="name" type="text" class="form-control" id="exampleInputName1" placeholder="Name" value="${member.name }">
                     </div>
                     <div class="form-group">
                       <label >이메일</label>
-                      <input id="email" name="email" type="email" class="form-control" id="exampleInputEmail3" placeholder="Email" value="${member.email }">
+                      <input id="email" name="email" type="email" class="form-control" id="exampleInputEmail3" placeholder="Email" value="${member.email }" readonly="readonly">
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">저장</button>
+                    <button type="submit" class="btn btn-primary mr-2" >저장</button>
                     <button onclick="location.href='password-changes'" type="button" class="btn btn-danger btn-rounded btn-fw">비밀번호 변경</button>
                     <button onclick="withDrawal()" type="button" class="btn btn-outline-danger btn-fw float-right">회원 탈퇴</button>
                   </form>

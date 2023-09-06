@@ -21,7 +21,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">회원목록</h1>
+                    <h1 class="mt-4">${user.name }의 게시물</h1>
                     <ol class="breadcrumb mb-4">
                     </ol>
                     <div class="card mb-4">
@@ -30,18 +30,25 @@
                                 <thead>
                                     <tr>
                                         <th>번호</th>
-                                        <th>이름</th>
-                                        <th>이메일</th>
-                                        <th>가입일</th>
+                                        <th>작성자</th>
+                                        <th>제목</th>
+                                        <th>수정여부</th>
+                                        <th>좋아요</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${user }" var="user">
+                                <c:forEach items="${memberWriteList }" var="memberWriteList">
                                 	<tr>
-                                        <td>${user.member_idx }</td>
-                                        <td><a href="userwrite?num=${user.member_idx }">${user.name }</a></td>
-                                        <td>${user.email }</td>
-                                        <td>${user.registration_date }</td>
+                                        <td>${memberWriteList.board_idx }</td>
+                                        <td>${user.name }</td>
+                                        <td><a href="${pageContext.request.contextPath }/board/detail?num=${memberWriteList.board_idx}">${memberWriteList.title }</a></td>
+                                        <c:if test="${memberWriteList.update_regdate ne null}">
+										  	<td>O</td>
+										</c:if>
+										<c:if test="${memberWriteList.update_regdate eq null}">
+										  	<td>x</td>
+										</c:if>
+                                        <td>${memberWriteList.heartcnt }</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

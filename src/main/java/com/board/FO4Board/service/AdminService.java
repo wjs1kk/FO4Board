@@ -16,4 +16,7 @@ public class AdminService {
 	public List<Map> selectAdminList() {
 		return mapper.selectAdminList();
 	}
+	public List<Map> memberWriteList(int member_idx){
+		return mapper.memberWriteList(member_idx);
+	}
 }

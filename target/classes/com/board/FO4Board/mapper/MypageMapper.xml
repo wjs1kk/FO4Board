@@ -17,4 +17,19 @@
 		DELETE FROM member
 		WHERE member_idx = #{member_idx}
 	</delete>
+	<select id="selectHeartList" resultType="Map">
+		select board_idx, b.member_idx, title, content, viewcnt, regdate, update_regdate, name
+			,(select count(*) from reply where b.board_idx=reply.board_idx) as re_count 
+			from board b 
+			inner join member m 
+			on b.member_idx = m.member_idx
+			where b.board_idx in (select board_idx from heart where member_idx =#{member_idx})
+			order by board_idx desc;
+	</select>
+	<select id="heartCount" resultType="int">
+		select count(*) 
+			from board
+			where board_idx 
+				in (select board_idx from heart where member_idx =#{member_idx});
+	</select>
 </mapper>

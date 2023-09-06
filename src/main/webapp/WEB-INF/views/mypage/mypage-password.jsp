@@ -60,7 +60,7 @@ function checkForm(){
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-6">
               <div class="brand-logo">
-                <img src="../resources/images/logo.svg" alt="logo">
+                <img src="${pageContext.request.contextPath }/resources/images/logo.PNG" alt="logo">
               </div>
               <h4>변경하실 비밀번호를 입력해주세요.</h4>
               

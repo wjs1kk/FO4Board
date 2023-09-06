@@ -7,6 +7,7 @@
 	<select id="selectNoticeList" resultType="map">
 		select *
 			from notice
+			order by notice_idx desc
 	</select>
 	<select id="selectNoticeDetail" resultType="map">
 		select * 

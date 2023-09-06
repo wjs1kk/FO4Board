@@ -19,7 +19,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="resources/images/logo.svg" alt="logo">
+                <img src="${pageContext.request.contextPath }/resources/images/logo.PNG" alt="logo">
               </div>
               <h4>환영합니다!</h4>
               <h6 class="font-weight-light">이메일로 로그인</h6>

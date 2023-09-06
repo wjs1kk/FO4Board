@@ -1,5 +1,6 @@
 package com.board.FO4Board.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.board.FO4Board.service.BoardService;
 import com.board.FO4Board.service.MemberService;
 import com.board.FO4Board.service.MypageService;
+import com.board.FO4Board.vo.PageVO;
 
 @Controller
 public class MypageController {
@@ -21,6 +24,9 @@ public class MypageController {
 	private MemberService memberService;
 	@Autowired
 	private MypageService mypageService;
+	@Autowired
+	private BoardService boardService;
+	
 	@GetMapping("mypage/main")
 	public String mypage_main(HttpSession session, Model model) {
 		if(session.getAttribute("member_idx") == null) {
@@ -38,6 +44,11 @@ public class MypageController {
 			return "fail_back";
 		}
 		int member_idx = Integer.parseInt(String.valueOf(session.getAttribute("member_idx")));
+		String nameCheck = memberService.memberNameCheck(name);
+		if(nameCheck != null) {
+			model.addAttribute("msg", "중복된 닉네임 입니다.");
+			return "fail_back";
+		}
 		mypageService.updateMember(name, email, member_idx);
 		return "redirect:/mypage/main";
 	}
@@ -77,6 +88,27 @@ public class MypageController {
 		mypageService.deleteMember(member_idx);
 		session.invalidate();
 		return "redirect:/";
+	}
+	@GetMapping("mypage/heart")
+	public String mypageHeart(HttpSession session, Model model,  PageVO pageVO, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		int total = mypageService.heartCount(Integer.parseInt(String.valueOf(session.getAttribute("member_idx"))));
+	    if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "10";
+		}
+	    pageVO = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+	    model.addAttribute("paging",pageVO);
+		List<Map> selectHeartList = mypageService.selectHeartList(Integer.parseInt(String.valueOf(session.getAttribute("member_idx"))), pageVO);
+		
+		
+		model.addAttribute("selectHeartList", selectHeartList);
+		
+		return "mypage/mypage-heart-list";
 	}
 	
 }

@@ -8,4 +8,10 @@
 			from member
 			where is_admin = 1
 	</select>
+	<select id="memberWriteList" resultType="Map">
+		select *
+			from board
+			where member_idx = #{member_idx}
+	</select>
+	
 </mapper>

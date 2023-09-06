@@ -38,7 +38,7 @@
 		})
 
 		$("#nameCheck").on("click", function() {
-			if(emailReg.exec($("#name").val())){
+			if(nameReg.exec($("#name").val())){
 				$.ajax({
 					type: "POST",
 					url: "memberNameCheck",

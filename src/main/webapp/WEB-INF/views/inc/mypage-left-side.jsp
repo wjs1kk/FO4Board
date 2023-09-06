@@ -17,6 +17,10 @@
         <i class="icon-head menu-icon"></i>
         <span class="menu-title">회원정보</span>
       </a>
+      <a class="nav-link" href="${pageContext.request.contextPath }/mypage/heart">
+        <i class="icon-head menu-icon"></i>
+        <span class="menu-title">좋아요</span>
+      </a>
     </li>
   </ul>
 </nav>

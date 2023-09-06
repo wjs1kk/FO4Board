@@ -13,5 +13,14 @@
 			from board
 			where member_idx = #{member_idx}
 	</select>
-	
+	<delete id="deleteNotice">
+		delete 
+			from notice
+			where notice_idx = #{notice_idx}
+	</delete>
+	<update id="updateNotice">
+		UPDATE notice
+		SET title=#{title}, content=#{content}, update_regdate= now()
+		WHERE notice_idx = #{notice_idx}
+	</update>
 </mapper>

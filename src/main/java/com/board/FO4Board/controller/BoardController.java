@@ -48,7 +48,6 @@ public class BoardController {
 		}
 	    pageVO = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 	    model.addAttribute("paging",pageVO);
-	    System.out.println((int)pageVO.getStart());
 		List<Map<String, Object>> boardList = boardService.selectBoardList(pageVO);
 		model.addAttribute("boardList",boardList);
 		return "board/board-main";

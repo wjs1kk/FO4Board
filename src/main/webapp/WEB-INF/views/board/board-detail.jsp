@@ -178,7 +178,6 @@ function cancelHeart(board_idx) {
                   </c:choose>
                   <br>
 <!--                   댓글 목록 -->
-<!-- 				나중에 css 수정하기 -->
 				  <c:forEach items="${replyList }" var="replyList">	
                   <hr>
                   <div class="card-body">

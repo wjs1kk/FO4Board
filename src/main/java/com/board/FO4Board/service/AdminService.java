@@ -19,4 +19,10 @@ public class AdminService {
 	public List<Map> memberWriteList(int member_idx){
 		return mapper.memberWriteList(member_idx);
 	}
+	public int deleteNotice(int notice_idx) {
+		return mapper.deleteNotice(notice_idx);
+	}
+	public int updateNotice(String title, String content, int notice_idx) {
+		return mapper.updateNotice(title, content, notice_idx);
+	}
 }

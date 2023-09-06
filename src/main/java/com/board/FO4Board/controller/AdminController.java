@@ -6,10 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.FO4Board.service.AdminService;
 import com.board.FO4Board.service.BoardService;
@@ -81,5 +83,30 @@ public class AdminController {
 		}
 		adminService.updateNotice(title, content, num);
 		return "redirect:/notice/detail?num="+num;
+	}
+	@GetMapping("admin/memberUpdate")
+	public String memberupdate(Model model, int num) {
+		model.addAttribute("user", memberService.selectUser_idx(num));
+		return "admin/member-update";
+	}
+	@PostMapping("admin/memberUpdatePro")
+	public String memberUpdatePro(Model model, String name, String email, String password, int num) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String securePasswd = passwordEncoder.encode(password);
+		int updateCount = adminService.updateMember(name, email, securePasswd, num);
+		
+		if(updateCount > 0) {
+			return "redirect:/admin/main";
+		}
+		model.addAttribute("msg", "회원 정보 수정 실패!");
+		return "fail_back";
+	}
+	@PostMapping("admin/memberDeletePro")
+	public String memberDeletePro(Model model, int num) {
+		if(0 < adminService.deleteMember(num)) {
+			return "redirect:/admin/main";
+		}
+		model.addAttribute("msg", "회원 삭제 실패!");
+		return "fail_back";
 	}
 }

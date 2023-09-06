@@ -23,4 +23,14 @@
 		SET title=#{title}, content=#{content}, update_regdate= now()
 		WHERE notice_idx = #{notice_idx}
 	</update>
+	<update id="updateMember">
+		update member
+		set name = #{name}, email = #{email}, password = #{password}
+		where member_idx = #{member_idx}
+	</update>
+	<delete id="deleteMember">
+		delete 
+			from member
+			where member_idx = #{member_idx}
+	</delete>
 </mapper>

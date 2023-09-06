@@ -13,6 +13,18 @@
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="../resources/admin-css/styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	function memberDelete(num) {
+		result = window.confirm("정말로 삭제하시겠습니까?");
+		if(result){
+			let f = document.createElement('form');
+			f.setAttribute('method', 'post');	
+			f.setAttribute('action', 'memberDeletePro?num='+num);
+			document.body.appendChild(f);
+			f.submit();
+		}
+	}
+</script>
 </head>
 <body class="sb-nav-fixed">
     <jsp:include page="top.jsp" />
@@ -33,6 +45,7 @@
                                         <th>이름</th>
                                         <th>이메일</th>
                                         <th>가입일</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,6 +55,10 @@
                                         <td><a href="userwrite?num=${user.member_idx }">${user.name }</a></td>
                                         <td>${user.email }</td>
                                         <td>${user.registration_date }</td>
+                                        <td>
+	                                        <button onclick="location.href='memberUpdate?num=${user.member_idx}'" type="button" class="btn btn-success">수정</button>
+	                                        <button type="button" class="btn btn-danger" onclick="memberDelete(${user.member_idx})">삭제</button>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -50,18 +67,7 @@
                     </div>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
